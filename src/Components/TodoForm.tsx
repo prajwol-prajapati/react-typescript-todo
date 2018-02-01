@@ -1,6 +1,14 @@
 import * as React from 'react';
+import { TagsProps } from '../Interfaces/TodoInterface';
 
 function AddTodo(props: any) {
+	let defaultTags = props.defaultTags.map((tag: TagsProps) => {
+		return (
+			<span  key={tag.id}>
+				<input type="checkbox" name="tags" value={tag.id} onClick={props.handleChange}/>{tag.tagName}
+			</span>
+		);
+	});
 	// let a: string = 'blah';
 	return (
 		<div className="add-edit-form-content">
@@ -13,9 +21,7 @@ function AddTodo(props: any) {
 				</div>
 				<div>
 					<label>Tags</label><br />
-					<input type="checkbox" name="tags" value="tag1" defaultChecked={true} />tag1
-					<input type="checkbox" name="tags" value="tag2" />tag2
-					<input type="checkbox" name="tags" value="tag3" />tag3
+					{defaultTags}
 				</div>
 				<div>
 					<label>Completed</label>

@@ -6,10 +6,11 @@ const INITIALSTATE: InitialState = {
 	newTodo: {
 		id: 1,
 		name: '',
-		tags: [1, 2],
+		tags: [],
 		completed: 'false',
 		date: moment()
 	},
+	defaultTags: [],
 	editStatus: false,
 	currentEditId: 0,
 	searchKey: '',
@@ -44,7 +45,20 @@ const allReducer = (state = INITIALSTATE, action: Action) => {
 		case 'GET_TODOS':
 			return { ...state, todos: action.payload };
 
+		case 'GET_TAGS':
+			return { ...state, defaultTags: action.payload };
+
 		case 'HANDLE_CHANGE':
+			if (changeName === 'tags') {
+				return {
+					...state,
+					newTodo: {
+						...obj,
+						[changeName]: [...obj[changeName], action.payload]
+					}
+				};
+			}
+
 			return {
 				...state,
 				newTodo: {
@@ -74,7 +88,7 @@ const allReducer = (state = INITIALSTATE, action: Action) => {
 				newTodo: {
 					id: 1,
 					name: '',
-					tags: [1, 2],
+					tags: [],
 					completed: 'false',
 					date: moment()
 				}
@@ -135,4 +149,5 @@ interface InitialState {
 	searchKey: string;
 	idCounter: number;
 	addEditForm: boolean;
+	defaultTags: Array<any>;
 }

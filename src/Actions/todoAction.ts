@@ -1,8 +1,15 @@
-import { TodoProps } from '../Interfaces/TodoInterface';
+import { TodoProps, TagsProps } from '../Interfaces/TodoInterface';
 
 export const getTodos = (payload: Array<TodoProps>) => {
 	return {
 		type: 'GET_TODOS',
+		payload
+	};
+};
+
+export const getTags = (payload: Array<TagsProps>) => {
+	return {
+		type: 'GET_TAGS',
 		payload
 	};
 };

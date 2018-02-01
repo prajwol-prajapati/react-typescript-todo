@@ -35,17 +35,29 @@ class MainWrapper extends React.Component<any, any> {
 	}
 
 	getTodos(): void {
+		console.log(axiosService.defaults.headers);
 		axiosService.get('todos')
 			.then(
 			(value: any) => {
-				// console.log(value.data.result.data, 'value.data.data');
+				console.log(value, 'value.data.data');
 				this.props.dispatch(action.getTodos(value.data.result.data));
 			}
 			);
 	}
 
+	getTags(): void {
+		axiosService.get('tags')
+			.then(
+				(value: any) => {
+					console.log(value.data.result, 'tags inside database ------------');
+					this.props.dispatch(action.getTags(value.data.result));
+				}
+			);
+	}
+
 	componentDidMount(): void {
 		this.getTodos();
+		this.getTags();
 	}
 
 	handleChange(event: any) {
@@ -128,6 +140,7 @@ class MainWrapper extends React.Component<any, any> {
 					handleSubmit={this.props.editStatus ? this.submitEdit : this.addTodo}
 					defaultValue={this.props.newTodo}
 					editStatus={this.props.editStatus}
+					defaultTags={this.props.defaultTags}
 					toggleShowForm={this.toggleAddEditForm}
 				/>
 			</div>

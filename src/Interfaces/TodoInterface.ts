@@ -15,6 +15,11 @@ export interface TodoProps {
 	editTodo?: any;
 }
 
+export interface TagsProps {
+	id: number;
+	tagName: string;
+}
+
 export interface StoreProps {
 	dispatch: any;
 	currentEditId: number;
